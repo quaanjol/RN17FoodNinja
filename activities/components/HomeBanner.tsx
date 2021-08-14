@@ -1,5 +1,9 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity, StyleSheet, Dimensions, ScrollView} from 'react-native';
+import {View, 
+    Image, 
+    StyleSheet, 
+    Dimensions, 
+    ImageSourcePropType} from 'react-native';
 import Swiper from 'react-native-swiper';
 
 //
@@ -15,7 +19,17 @@ const styles = StyleSheet.create({
     },
 })
 
-const HomeBanner = ({autoplay, banners}) => {
+interface IDataBanner {
+    id: string;
+    img: ImageSourcePropType;
+}
+
+interface Props {
+    banners: IDataBanner[];
+    autoplay: boolean;
+}
+
+const HomeBanner = ({autoplay = true, banners}:Props) => {
 
     return (
         <Swiper showsHorizontalScrollIndicator={false} paginationStyle={{

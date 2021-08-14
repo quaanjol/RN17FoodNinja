@@ -6,6 +6,9 @@ import Header from '../components/Header';
 import Filter from './Filter';
 import asset from '../../config/asset';
 
+import {StackNavigationProp} from '@react-navigation/stack';
+import {TRootStackParamList} from '../../App';
+
 const screenWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
@@ -107,8 +110,17 @@ const styles = StyleSheet.create({
     },
 });
 
+type MainTabNavigationProp = StackNavigationProp<
+  TRootStackParamList,
+  'MainTab'
+>;
 
-const Home = ({ navigation }) => {
+type Props = {
+    navigation: MainTabNavigationProp;
+};
+  
+
+const Home = ({ navigation }: Props) => {
     // nearest restaurants
     const nearestRestaurants = [
         {
@@ -165,28 +177,29 @@ const Home = ({ navigation }) => {
     // banner
     const banners = [
         {
-            id: 1,
+            id: "1",
             img: asset.img_banner
         },
         {
-            id: 2,
+            id: "2",
             img: asset.img_banner_2
         },
         {
-            id: 1,
+            id: "3",
             img: asset.img_banner
         },
         {
-            id: 4,
+            id: "4",
             img: asset.img_banner_2
         }
     ];
 
     return (
     // container
-    <ScrollView>
-    <View style={styles.container, {paddingBottom: 20}} showsVerticalScrollIndicator={false}
-    showsHorizontalScrollIndicator={false}>
+    <ScrollView style={styles.container} 
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}>
+    <View style={styles.container} >
 
         {/* header view */}
         <Header/>
@@ -194,7 +207,10 @@ const Home = ({ navigation }) => {
         {/* search view */}
         <View style={styles.searchContainer}>
             <Pressable style={styles.searchInput} onPress={() => {
-                navigation.navigate('Filter')
+                navigation.navigate('Filter', {
+                    name: 'Quan',
+                    age: 23,
+                  })
             }}>
                 <Image source={asset.icon_search}/>
                 <Text style={styles.searchInuptText}>What do you want to order?</Text>
@@ -208,7 +224,7 @@ const Home = ({ navigation }) => {
             <Text style={styles.nearestText}>
                 Nearest Restaurants
             </Text>
-            <Text style={styles.vieMoreText}>
+            <Text style={styles.viewMoreText}>
                 View more
             </Text>
         </View>
@@ -238,7 +254,7 @@ const Home = ({ navigation }) => {
             <Text style={styles.nearestText}>
                 Nearest restaurants horizontal scroll
             </Text>
-            <Text style={styles.vieMoreText}>
+            <Text style={styles.viewMoreText}>
                 View more
             </Text>
         </View>
@@ -269,7 +285,7 @@ const Home = ({ navigation }) => {
             <Text style={styles.nearestText}>
                 Popular menu
             </Text>
-            <Text style={styles.vieMoreText}>
+            <Text style={styles.viewMoreText}>
                 View more
             </Text>
         </View>

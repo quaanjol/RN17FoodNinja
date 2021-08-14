@@ -15,15 +15,30 @@ import Home from './activities/screens/Home';
 import MainTab from './activities/tab/MainTab';
 import Filter from './activities/screens/Filter';
 
-const Stack = createStackNavigator();
+export type TRootStackParamList = {
+  MainTab: undefined;
+  Filter: {
+    name: string;
+    age: number;
+  };
+};
+
+const Stack = createStackNavigator<TRootStackParamList>();
 
 
 const App = () => {
   return (
     <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="MainTab" component={MainTab} />
-          <Stack.Screen name="Filter" component={Filter} />
+          <Stack.Screen 
+            name="MainTab" 
+            component={MainTab} 
+            options={{headerShown: false}}/>
+
+          <Stack.Screen 
+            name="Filter" 
+            component={Filter} 
+            options={{headerShown: false}}/>
         </Stack.Navigator>
     </NavigationContainer>
   );
